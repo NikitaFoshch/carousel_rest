@@ -1,15 +1,13 @@
 server:
-  servlet:
-    context-path: /Vilki_Palki_Api
-  port: 7576
+  port: 8080
 
 spring:
   application:
-    name: Vilki-Palki
+    name: SpaceLab-Java
   datasource:
-    url: jdbc:postgresql://localhost:5432/avada_slj_vp
-    username: avada_slj_vp
-    password: mgBOTd2tBb
+    url: jdbc:postgresql://localhost:5432/spacelab_java
+    username: avada_slj
+    password: WddnZNCCgfA4YEu
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -23,18 +21,3 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 50MB
-
-  mail:
-    host: smtp.gmail.com
-    username: test.in.odessa@gmail.com
-    password: sggcjhmrombnkscg
-    port: 587
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
-      mail.smtp.starttls.required: true
-    protocol: smtp
-
-app:
-  jwt:
-    secret: SV9ET04nVF9LTk9XX1RIRV9TRUNSRVRfVE9LRU4=
