@@ -32,12 +32,12 @@ public class CarouselServiceImpl implements CarouselService {
 
     @Override
     public List<Carousel> getAllCarousel() {
-        return carouselRepository.findAll(Sort.by(Sort.Direction.DESC,"createAt"));
+        return carouselRepository.findAll(Sort.by(Sort.Direction.DESC,"updateAt"));
     }
 
     @Override
     public List<CarouselResponse> getAllCarouselWithDto() {
-        return carouselRepository.findAll(Sort.by(Sort.Direction.DESC,"createAt"))
+        return getAllCarousel()
                 .stream()
                 .map(CarouselMapper::toSimplifiedDto)
                 .collect(Collectors.toList());

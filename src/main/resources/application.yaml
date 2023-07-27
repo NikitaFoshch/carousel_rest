@@ -5,7 +5,7 @@ spring:
   application:
     name: SpaceLab-Java
   datasource:
-    url: jdbc:postgresql://localhost:5432/spacelab_java
+    url: jdbc:postgresql://postgresql_slj:5432/spacelab_java
     username: avada_slj
     password: WddnZNCCgfA4YEu
     driver-class-name: org.postgresql.Driver
