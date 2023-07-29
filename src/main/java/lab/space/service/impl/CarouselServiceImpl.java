@@ -3,8 +3,9 @@ package lab.space.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import lab.space.entity.Carousel;
 import lab.space.mapper.CarouselMapper;
-import lab.space.model.CarouselResponse;
+import lab.space.model.CarouselResponseByReact;
 import lab.space.model.CarouselSaveRequest;
+import lab.space.model.CarouselSaveResponse;
 import lab.space.model.CarouselUpdateRequest;
 import lab.space.repository.CarouselRepository;
 import lab.space.service.CarouselService;
@@ -16,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -31,20 +31,26 @@ public class CarouselServiceImpl implements CarouselService {
     }
 
     @Override
+    public CarouselSaveResponse getLastCarousel() {
+        return CarouselMapper.toCarouselSaveResponse(
+                carouselRepository
+                        .findAll(Sort.by(Sort.Direction.DESC, "createAt"))
+                        .get(0)
+        );
+    }
+
+    @Override
     public List<Carousel> getAllCarousel() {
-        return carouselRepository.findAll(Sort.by(Sort.Direction.DESC,"updateAt"));
+        return carouselRepository.findAll(Sort.by(Sort.Direction.DESC, "updateAt"));
     }
 
     @Override
-    public List<CarouselResponse> getAllCarouselWithDto() {
-        return getAllCarousel()
-                .stream()
-                .map(CarouselMapper::toSimplifiedDto)
-                .collect(Collectors.toList());
+    public CarouselResponseByReact getAllCarouselWithDto() {
+        return CarouselMapper.toCarouselResponseByReact(getAllCarousel());
     }
 
     @Override
-    public void saveCarousel(CarouselSaveRequest carouselSaveRequest) {
+    public CarouselSaveResponse saveCarousel(CarouselSaveRequest carouselSaveRequest) {
         carouselRepository.save(
                 new Carousel()
                         .setLogin(carouselSaveRequest.login())
@@ -54,6 +60,7 @@ public class CarouselServiceImpl implements CarouselService {
                         .setProjectName(carouselSaveRequest.projectName())
                         .setProjectUrl(carouselSaveRequest.projectUrl())
         );
+        return getLastCarousel();
     }
 
     @Override
@@ -69,7 +76,7 @@ public class CarouselServiceImpl implements CarouselService {
                             .setProjectUrl(carouselUpdateRequest.projectUrl())
             );
             return ResponseEntity.ok().build();
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
         }
 
@@ -80,7 +87,7 @@ public class CarouselServiceImpl implements CarouselService {
         try {
             carouselRepository.delete(getCarouselById(id));
             return ResponseEntity.ok().build();
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
         }
     }

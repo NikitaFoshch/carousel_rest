@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lab.space.entity.Carousel;
-import lab.space.model.CarouselResponse;
+import lab.space.model.CarouselResponseByReact;
 import lab.space.model.CarouselSaveRequest;
 import lab.space.model.CarouselUpdateRequest;
 import lab.space.service.CarouselService;
@@ -23,6 +23,7 @@ import java.util.List;
 @RequestMapping("carousel")
 @RequiredArgsConstructor
 @Tag(name = "Carousel", description = "Operations related to Carousel")
+@CrossOrigin("*")
 public class CarouselController {
     private final CarouselService carouselService;
 
@@ -31,8 +32,8 @@ public class CarouselController {
             @ApiResponse(responseCode = "200", description = "OK"),
     })
     @GetMapping("get-all-carousel")
-    public ResponseEntity<List<CarouselResponse>> getAllCarousel() {
-        return ResponseEntity.ok(carouselService.getAllCarouselWithDto());
+    public ResponseEntity<CarouselResponseByReact> getAllCarousel() {
+        return ResponseEntity.ok().body(carouselService.getAllCarouselWithDto());
     }
 
     @Operation(summary = "Get all carousel")
@@ -56,8 +57,7 @@ public class CarouselController {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(ErrorMapper.mapErrors(bindingResult));
         }
-        carouselService.saveCarousel(request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(carouselService.saveCarousel(request));
     }
 
     @Operation(summary = "Update carousel by id", description = "Enter your value")

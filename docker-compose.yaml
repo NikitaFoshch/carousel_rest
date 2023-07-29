@@ -1,0 +1,37 @@
+version: '3.8'
+
+name: spacelab-java
+
+services:
+  postgresql:
+    container_name: postgresql_slj
+    image: 'postgres:15.3'
+    ports:
+      - "5433:5432"
+    environment:
+      - 'POSTGRES_DB=spacelab_java'
+      - 'POSTGRES_USER=avada_slj'
+      - 'POSTGRES_PASSWORD=WddnZNCCgfA4YEu'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  app-back:
+    container_name: spacelab-java-app
+    build:
+      context: .
+      dockerfile: /src/main/Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgresql
+    volumes:
+      - app-back_images:/files
+  app-front:
+    container_name: spacelab-react-app
+    build:
+      context: ../reactjs_carousel
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+volumes:
+  app-back_images:
+  postgres_data:
