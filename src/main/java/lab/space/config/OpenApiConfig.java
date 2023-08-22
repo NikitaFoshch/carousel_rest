@@ -20,7 +20,7 @@ public class OpenApiConfig {
                                 .description("This is a spacelab-java-rest server.")
                                 .termsOfService("https://swagger.io/terms/")
                 )
-                .addServersItem(new Server().url("http://localhost:8081/"));
+                .addServersItem(new Server().url("https://slj.avada-media-dev1.od.ua/projects-rest"));
     }
 
     @Bean

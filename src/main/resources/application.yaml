@@ -1,5 +1,7 @@
 server:
   port: 8080
+  servlet:
+    context-path: /projects-rest
 
 spring:
   application:
@@ -21,3 +23,7 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 50MB
+
+springdoc:
+    swagger-ui:
+      path: /api-docs.html

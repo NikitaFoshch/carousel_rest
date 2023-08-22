@@ -60,7 +60,7 @@ public class CarouselController {
         return ResponseEntity.ok(carouselService.saveCarousel(request));
     }
 
-    @Operation(summary = "Update carousel by id", description = "Enter your value")
+    @Operation(summary = "Update carousel", description = "Enter your value")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),

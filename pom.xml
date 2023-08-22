@@ -13,6 +13,9 @@
     <groupId>lab.space</groupId>
     <artifactId>carousel_rest</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>spaceLab-java-rest</name>
+    <description>spaceLab-java-rest</description>
 
     <properties>
         <java.version>17</java.version>
@@ -39,12 +42,6 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.1.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-docker-compose</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -68,7 +65,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>SpaceLab-Java-Rest</finalName>
+                    <finalName>SLJ-Projects-Rest</finalName>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
